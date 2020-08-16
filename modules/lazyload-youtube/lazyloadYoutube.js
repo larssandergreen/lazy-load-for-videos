@@ -39,7 +39,7 @@ export function convertToSeconds(timestring) {
   let startTime = 0;
   const timeFactors = [3600, 60, 1]; // h, m, s
   const startMatch = timestring.match(
-    /(?:(\d+)(?:h))?(?:(\d+)(?:m))?(?:(\d+)(?:s))?/,
+    /(?:(\d+)(?:h))?(?:(\d+)(?:m))?(?:(\d+)(?:s))?/
   );
 
   if (startMatch) {
@@ -95,7 +95,7 @@ export function getEmbedUrl({
    * Generate URL
    */
   return `https://www.youtube-nocookie.com/embed/${firstVideoToPlay}?${queryHashToString(
-    queryWithUrlOptions,
+    queryWithUrlOptions
   )}`;
 }
 
@@ -185,7 +185,7 @@ function loadVideo(domNode) {
   videoLinkElement.innerHTML = `<div aria-hidden="true" class="lazy-load-info"><span class="titletext youtube">${videoTitle()}</span></div>`;
 
   const lazyloadDiv = createElements(
-    '<div aria-hidden="true" class="lazy-load-div"></div>',
+    '<div aria-hidden="true" class="lazy-load-div"></div>'
   );
   videoLinkElement.insertBefore(lazyloadDiv, videoLinkElement.firstChild);
   if (pluginOptions.buttonstyle) {
@@ -219,11 +219,11 @@ function loadVideo(domNode) {
     const videoIFrame = createElements(
       `<iframe width="${parseInt(
         videoLinkElement.clientWidth,
-        10,
+        10
       )}" height="${parseInt(
         videoLinkElement.clientHeight,
-        10,
-      )}" style="vertical-align:top;" src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
+        10
+      )}" style="vertical-align:top;" src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`
     );
 
     eventTarget.parentNode.replaceChild(videoIFrame, eventTarget);
@@ -235,7 +235,7 @@ function load() {
   videoLinkElements.forEach(loadVideo);
 
   if (pluginOptions.loadthumbnail) {
-    inViewOnce(videoLinkElements, element => setBackgroundImg(element));
+    inViewOnce(videoLinkElements, (element) => setBackgroundImg(element));
   }
 }
 

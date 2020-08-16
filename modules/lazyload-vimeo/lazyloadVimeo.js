@@ -1,5 +1,8 @@
 import {
-  init, resizeVideo, setBackgroundImage, inViewOnce,
+  init,
+  resizeVideo,
+  setBackgroundImage,
+  inViewOnce,
 } from '../shared/video';
 import createElements from '../utils/createElements';
 import findElements from '../utils/findElements';
@@ -50,23 +53,34 @@ function generateVimeoCallbackUrl(thumbnailId) {
 }
 
 function vimeoLoadingThumb(videoLinkElement, id) {
-  const playButtonDiv = createElements('<div aria-hidden="true" class="lazy-load-div"></div>');
+  const playButtonDiv = createElements(
+    '<div aria-hidden="true" class="lazy-load-div"></div>'
+  );
   videoLinkElement.appendChild(playButtonDiv);
 
   if (lazyload_video_settings.vimeo.loadthumbnail) {
-    const videoThumbnail = videoLinkElement.getAttribute('data-video-thumbnail');
+    const videoThumbnail = videoLinkElement.getAttribute(
+      'data-video-thumbnail'
+    );
     if (videoThumbnail) {
-      inViewOnce(findElements(`[id="${id}"]`), element => setBackgroundImage(element, videoThumbnail));
+      inViewOnce(findElements(`[id="${id}"]`), (element) =>
+        setBackgroundImage(element, videoThumbnail)
+      );
     } else {
       const script = document.createElement('script');
       script.src = `${generateVimeoCallbackUrl(id)}.json?callback=showThumb`;
-      videoLinkElement.parentNode.insertBefore(script, videoLinkElement.firstChild);
+      videoLinkElement.parentNode.insertBefore(
+        script,
+        videoLinkElement.firstChild
+      );
     }
   }
 
   if (lazyload_video_settings.vimeo.show_title) {
     const videoTitle = videoLinkElement.getAttribute('data-video-title');
-    const info = createElements(`<div aria-hidden="true" class="lazy-load-info"><span class="titletext vimeo">${videoTitle}</span></div>`);
+    const info = createElements(
+      `<div aria-hidden="true" class="lazy-load-info"><span class="titletext vimeo">${videoTitle}</span></div>`
+    );
     videoLinkElement.appendChild(info);
   }
 
@@ -110,7 +124,14 @@ function vimeoThumbnailEventListeners(videoLinkElement) {
       playercolour = `&color=${pluginOptions.playercolour}`;
     }
 
-    const videoIFrame = createElements(`<iframe src="${vimeoUrl(vid)}?autoplay=1${playercolour}" style="height:${parseInt(eventTarget.clientHeight, 10)}px;width:100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen autoPlay allowFullScreen allow=autoplay></iframe>`);
+    const videoIFrame = createElements(
+      `<iframe src="${vimeoUrl(
+        vid
+      )}?autoplay=1${playercolour}" style="height:${parseInt(
+        eventTarget.clientHeight,
+        10
+      )}px;width:100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen autoPlay allowFullScreen allow=autoplay></iframe>`
+    );
     eventTarget.parentNode.replaceChild(videoIFrame, eventTarget);
   });
 }
@@ -130,7 +151,9 @@ const lazyloadVimeo = (options) => {
   };
 
   init({
-    load, pluginOptions, previewVideoSelector: `.${classPreviewVimeo}`,
+    load,
+    pluginOptions,
+    previewVideoSelector: `.${classPreviewVimeo}`,
   });
 };
 

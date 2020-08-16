@@ -107,12 +107,17 @@ const config = {
   },
   plugins: [extractCSS],
   externals: {
-    // Manually import used WP packages because if we would use "@wordpress/dependency-extraction-webpack-plugin" instead, our use of "@wordpress/block-library" would throw an error because we're directly accessing internals that aren't exposed via the wp.blockLibrary API
+    // Manually import used WP packages because if we would use
+    // "@wordpress/dependency-extraction-webpack-plugin" instead,
+    // our use of "@wordpress/block-library" would throw an error
+    // because we're directly accessing internals that aren't
+    // exposed via the wp.blockLibrary API
     '@wordpress/data': 'wp.data',
     '@wordpress/i18n': 'wp.i18n',
     '@wordpress/element': 'wp.element',
     '@wordpress/compose': 'wp.compose',
     '@wordpress/hooks': 'wp.hooks',
+    '@wordpress/blocks': 'wp.blocks',
     '@wordpress/block-editor': 'wp.blockEditor',
   },
 };

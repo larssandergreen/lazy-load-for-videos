@@ -54,24 +54,22 @@ function generateVimeoCallbackUrl(thumbnailId) {
 
 function vimeoLoadingThumb(videoLinkElement, id) {
   const playButtonDiv = createElements(
-    '<div aria-hidden="true" class="lazy-load-div"></div>'
+    '<div aria-hidden="true" class="lazy-load-div"></div>',
   );
   videoLinkElement.appendChild(playButtonDiv);
 
   if (lazyload_video_settings.vimeo.loadthumbnail) {
     const videoThumbnail = videoLinkElement.getAttribute(
-      'data-video-thumbnail'
+      'data-video-thumbnail',
     );
     if (videoThumbnail) {
-      inViewOnce(findElements(`[id="${id}"]`), (element) =>
-        setBackgroundImage(element, videoThumbnail)
-      );
+      inViewOnce(findElements(`[id="${id}"]`), (element) => setBackgroundImage(element, videoThumbnail));
     } else {
       const script = document.createElement('script');
       script.src = `${generateVimeoCallbackUrl(id)}.json?callback=showThumb`;
       videoLinkElement.parentNode.insertBefore(
         script,
-        videoLinkElement.firstChild
+        videoLinkElement.firstChild,
       );
     }
   }
@@ -79,7 +77,7 @@ function vimeoLoadingThumb(videoLinkElement, id) {
   if (lazyload_video_settings.vimeo.show_title) {
     const videoTitle = videoLinkElement.getAttribute('data-video-title');
     const info = createElements(
-      `<div aria-hidden="true" class="lazy-load-info"><span class="titletext vimeo">${videoTitle}</span></div>`
+      `<div aria-hidden="true" class="lazy-load-info"><span class="titletext vimeo">${videoTitle}</span></div>`,
     );
     videoLinkElement.appendChild(info);
   }
@@ -126,11 +124,11 @@ function vimeoThumbnailEventListeners(videoLinkElement) {
 
     const videoIFrame = createElements(
       `<iframe src="${vimeoUrl(
-        vid
+        vid,
       )}?autoplay=1${playercolour}" style="height:${parseInt(
         eventTarget.clientHeight,
-        10
-      )}px;width:100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen autoPlay allowFullScreen allow=autoplay></iframe>`
+        10,
+      )}px;width:100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen autoPlay allowFullScreen allow=autoplay></iframe>`,
     );
     eventTarget.parentNode.replaceChild(videoIFrame, eventTarget);
   });

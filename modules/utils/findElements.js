@@ -1,2 +1,3 @@
-export default (domSelector, rootNode = document) =>
-  [].slice.call(rootNode.querySelectorAll(domSelector));
+export default function findElements(domSelector, rootNode = document) {
+    return [].slice.call(rootNode.querySelectorAll(domSelector));
+}

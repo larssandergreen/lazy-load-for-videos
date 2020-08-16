@@ -15,13 +15,12 @@ export function setBackgroundImage(domNode, imageUrl) {
 
 function determineVideoRatio(element) {
   const parent = element && element.parentNode && element.parentNode.parentNode;
-  const hasAspectRatioClass =
-    parent && parent.classList.contains('wp-has-aspect-ratio');
+  const hasAspectRatioClass = parent && parent.classList.contains('wp-has-aspect-ratio');
   const classes = String(parent.classList);
   const ratioclass = classes
     .substring(
       classes.lastIndexOf('wp-embed-aspect-'),
-      classes.lastIndexOf(' ')
+      classes.lastIndexOf(' '),
     )
     .trim();
 
@@ -45,7 +44,7 @@ export function resizeVideo(domContainerItem) {
   const videoRatio = determineVideoRatio(domContainerItem);
   findElements(
     'object, embed, iframe, .preview-lazyload, .lazy-load-div',
-    domContainerItem
+    domContainerItem,
   ).forEach((domItem) => {
     const element = domItem;
     const width = element.parentNode.clientWidth;

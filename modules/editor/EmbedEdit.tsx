@@ -13,9 +13,8 @@ import EmbedPlaceholder from '@wordpress/block-library/src/embed/embed-placehold
 import { __, sprintf } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
-import getVariation from './getVariation';
+import getVariation, { ProviderName } from './getVariation';
 import EmbedPreview from './EmbedEditPreview';
-import { ProviderName } from './types';
 
 export type EmbedEditProps = {
   attributes: {

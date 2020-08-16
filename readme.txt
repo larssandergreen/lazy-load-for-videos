@@ -147,6 +147,9 @@ Note that playlists are not working when you're using the pre-/post-roll feature
 
 == Changelog ==
 
+= 2.9.0 =
+* Change browser support from IE10 to IE11
+
 = 2.8.7 =
 * Fix: White arrow was overlaying the red Youtube play button
 * A few tiny invisible improvements

@@ -1,7 +1,8 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { __, _x } from '@wordpress/i18n';
 import { embedContentIcon, embedYouTubeIcon, embedVimeoIcon } from './icons';
-import { ProviderName } from './types';
+
+export type ProviderName = 'youtube' | 'vimeo';
 
 const variations = {
   youtube: {

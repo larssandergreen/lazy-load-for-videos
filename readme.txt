@@ -149,6 +149,8 @@ Note that playlists are not working when you're using the pre-/post-roll feature
 
 = 2.9.0 =
 * Change browser support from IE10 to IE11
+* Fix: Support Vimeo-specific CSS class filter: lazyload_preview_url_css_vimeo
+* Rename filter lazyload_preview_url_a_class_youtube to lazyload_preview_url_class_youtube
 
 = 2.8.7 =
 * Fix: White arrow was overlaying the red Youtube play button

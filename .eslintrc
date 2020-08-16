@@ -11,7 +11,7 @@
   },
   "globals": {
     "wp": true,
-    "lazyload_video_settings": true,
+    "llv_config": true,
     // Jest globals
     "describe": true,
     "it": true,

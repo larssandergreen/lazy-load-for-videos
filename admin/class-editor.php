@@ -16,7 +16,7 @@ class Lazy_Load_For_Videos_Editor {
 
 	function enqueue() {
 		wp_enqueue_script(
-			'lazyload_editor_js',
+			'lazyload-editor-js',
 			LL_URL . 'assets/js/editor.js',
 			[ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'lodash' ],
 			SCRIPT_DEBUG ? null : LL_VERSION

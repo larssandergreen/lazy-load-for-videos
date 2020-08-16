@@ -4,15 +4,20 @@
  */
 class Lazy_Load_For_Videos_Youtube {
 	
-	function enqueue() {
-		wp_enqueue_script( 'lazyload-youtube-js');
+	function __construct() {
+		wp_enqueue_script( 'lazyload-youtube-js', LL_URL . 'assets/js/lazyload-youtube.js', null, SCRIPT_DEBUG ? null : LL_VERSION, true );
+		wp_add_inline_script(
+			'lazyload-youtube-js',
+			'window.llv_config=window.llv_config||{};window.llv_config.youtube=' . json_encode($this->get_config()) . ';',
+			'before'
+		);
 	}
 
 	/**
 	 * Lazy Load Youtube Videos (Load youtube script and video after clicking on the preview image)
 	 * Thanks to »Lazy loading of youtube videos by MS-potilas 2012« (see http://yabtb.blogspot.com/2012/02/youtube-videos-lazy-load-improved-style.html)
 	 */
-	function get_js_settings() {
+	function get_config() {
 		return apply_filters( 'lly_change_options', array(
 			'colour'           => get_option( 'lly_opt_player_colour_progress', 'red' ),
 			'buttonstyle'      => get_option( 'll_opt_button_style', '' ),

@@ -67,7 +67,6 @@ function lazyload_load_textdomain() {
 }
 add_action( 'plugins_loaded', 'lazyload_load_textdomain' );
 
-
 function lazyload_videos_init_plugins_loaded() {
 	require_once( LL_PATH . 'admin/class-admin-options.php' );
 	require_once( LL_PATH . 'frontend/class-frontend.php' );
@@ -79,7 +78,6 @@ add_action( 'plugins_loaded', 'lazyload_videos_init_plugins_loaded', 15 );
 
 function lazyload_videos_admin_init() {
 	require_once( LL_PATH . 'admin/class-meta.php' );
-	require_once( LL_PATH . 'admin/class-editor.php' );
 }
 
 function lazyload_videos_frontend_init() {

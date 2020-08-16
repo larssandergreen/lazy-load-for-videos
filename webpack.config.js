@@ -13,7 +13,7 @@ const config = {
   entry: {
     editor: './modules/editor/webpackEntry.ts',
     admin: './modules/admin/webpackEntry.js',
-    'lazyload-all': './modules/lazyload-all/webpackEntry.js',
+    'lazyload-shared': './modules/lazyload-shared/webpackEntry.js',
     'lazyload-vimeo': './modules/lazyload-vimeo/webpackEntry.js',
     'lazyload-youtube': './modules/lazyload-youtube/webpackEntry.js',
   },

@@ -4,8 +4,13 @@
  */
 class Lazy_Load_For_Videos_Vimeo {
 
-	function enqueue() {
-		wp_enqueue_script( 'lazyload-vimeo-js');
+	function __construct() {
+		wp_enqueue_script( 'lazyload-vimeo-js', LL_URL . 'assets/js/lazyload-vimeo.js', null, SCRIPT_DEBUG ? null : LL_VERSION, true );
+		wp_add_inline_script(
+			'lazyload-vimeo-js',
+			'window.llv_config=window.llv_config||{};window.llv_config.vimeo=' . json_encode($this->get_config()) . ';',
+			'before'
+		);
 	}
 
 	/**
@@ -16,7 +21,7 @@ class Lazy_Load_For_Videos_Vimeo {
 	 * http://vimeo.com/48851874
 	 * http://vimeo.com/48851874/
 	 */
-	function get_js_settings() {
+	function get_config() {
 		return apply_filters( 'llv_change_options', array(
 			'buttonstyle'  => get_option( 'll_opt_button_style', '' ),
 			'playercolour' => get_option( 'llv_opt_player_colour', '' ),

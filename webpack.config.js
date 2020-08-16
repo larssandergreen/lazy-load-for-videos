@@ -1,7 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
-const babelConfig = require('./babel.config');
 
 const extractCSS = new MiniCssExtractPlugin({
   filename: 'css/[name].css',
@@ -12,8 +11,8 @@ const IS_DEV = process.env.NODE_ENV === 'development';
 const config = {
   mode: IS_DEV ? 'development' : 'production',
   entry: {
-    admin: './modules/admin/webpackEntry.js',
     editor: './modules/editor/webpackEntry.ts',
+    admin: './modules/admin/webpackEntry.js',
     'lazyload-all': './modules/lazyload-all/webpackEntry.js',
     'lazyload-vimeo': './modules/lazyload-vimeo/webpackEntry.js',
     'lazyload-youtube': './modules/lazyload-youtube/webpackEntry.js',
@@ -39,7 +38,6 @@ const config = {
         use: [
           {
             loader: 'babel-loader',
-            options: babelConfig,
           },
           {
             loader: 'eslint-loader',
@@ -57,7 +55,6 @@ const config = {
         use: [
           {
             loader: 'babel-loader',
-            options: babelConfig,
           },
           {
             loader: 'ts-loader',
@@ -124,6 +121,7 @@ const config = {
     '@wordpress/hooks': 'wp.hooks',
     '@wordpress/blocks': 'wp.blocks',
     '@wordpress/block-editor': 'wp.blockEditor',
+    lodash: 'lodash',
   },
 };
 

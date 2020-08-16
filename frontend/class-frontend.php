@@ -8,10 +8,10 @@ require_once( LL_PATH . 'frontend/class-frontend-init-scripts.php' );
 class Lazy_Load_For_Videos_Frontend {
 	function registerAll() {
 		// wp_deregister_script('jquery'); // <= For development: Deregister jQuery to ensure this plugin works without jQuery
-		wp_register_style( 'lazyload-video-css', LL_URL . 'assets/css/lazyload-all.css' );
-		wp_register_script( 'lazyload-video-js', LL_URL . 'assets/js/lazyload-all.js', null, LL_VERSION, true );
-		wp_register_script( 'lazyload-vimeo-js', LL_URL . 'assets/js/lazyload-vimeo.js', null, LL_VERSION, true );
-		wp_register_script( 'lazyload-youtube-js', LL_URL . 'assets/js/lazyload-youtube.js', null, LL_VERSION, true );
+		wp_register_style( 'lazyload-video-css', LL_URL . 'assets/css/lazyload-all.css', null, SCRIPT_DEBUG ? null : LL_VERSION );
+		wp_register_script( 'lazyload-video-js', LL_URL . 'assets/js/lazyload-all.js', null, SCRIPT_DEBUG ? null : LL_VERSION, true );
+		wp_register_script( 'lazyload-vimeo-js', LL_URL . 'assets/js/lazyload-vimeo.js', null, SCRIPT_DEBUG ? null : LL_VERSION, true );
+		wp_register_script( 'lazyload-youtube-js', LL_URL . 'assets/js/lazyload-youtube.js', null, SCRIPT_DEBUG ? null : LL_VERSION, true );
 	}
 
 	/**

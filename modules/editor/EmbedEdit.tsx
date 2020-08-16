@@ -14,7 +14,8 @@ import { __, sprintf } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
 import { useDispatch, useSelect } from '@wordpress/data';
 import getVariation, { ProviderName } from './getVariation';
-import EmbedPreview from './EmbedEditPreview';
+import EmbedEditPreview from './EmbedEditPreview';
+import VideoPreview from './VideoPreview';
 
 export type EmbedEditProps = {
   attributes: {
@@ -215,8 +216,8 @@ export default function EmbedEdit(props: EmbedEditProps) {
         toggleResponsive={toggleResponsive}
         switchBackToURLInput={() => setIsEditingURL(true)}
       />
-      <EmbedPreview
-        preview={<div>PREVIEW CONTENT</div>}
+      <EmbedEditPreview
+        preview={<VideoPreview url={url} />}
         className={combinedClassName}
         url={url}
         caption={caption}

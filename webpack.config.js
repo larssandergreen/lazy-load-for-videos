@@ -1,5 +1,7 @@
+const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
+const babelConfig = require('./babel.config');
 
 const extractCSS = new MiniCssExtractPlugin({
   filename: 'css/[name].css',
@@ -32,11 +34,12 @@ const config = {
         ],
       },
       {
-        test: /\.js$/,
-        exclude: /node_modules/,
+        test: /\.jsx?$/,
+        exclude: /node_modules\/(?!@wordpress\/block-library)/,
         use: [
           {
             loader: 'babel-loader',
+            options: babelConfig,
           },
           {
             loader: 'eslint-loader',
@@ -54,6 +57,7 @@ const config = {
         use: [
           {
             loader: 'babel-loader',
+            options: babelConfig,
           },
           {
             loader: 'ts-loader',
@@ -116,6 +120,7 @@ const config = {
     '@wordpress/i18n': 'wp.i18n',
     '@wordpress/element': 'wp.element',
     '@wordpress/compose': 'wp.compose',
+    '@wordpress/components': 'wp.components',
     '@wordpress/hooks': 'wp.hooks',
     '@wordpress/blocks': 'wp.blocks',
     '@wordpress/block-editor': 'wp.blockEditor',

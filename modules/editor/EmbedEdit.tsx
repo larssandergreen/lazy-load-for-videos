@@ -5,10 +5,10 @@ import {
   getClassNames,
   fallback,
   getAttributesFromPreview,
-} from '@wordpress/block-library/build-module/embed/util';
-import EmbedControls from '@wordpress/block-library/build-module/embed/embed-controls';
-import EmbedLoading from '@wordpress/block-library/build-module/embed/embed-loading';
-import EmbedPlaceholder from '@wordpress/block-library/build-module/embed/embed-placeholder';
+} from '@wordpress/block-library/src/embed/util';
+import EmbedControls from '@wordpress/block-library/src/embed/embed-controls';
+import EmbedLoading from '@wordpress/block-library/src/embed/embed-loading';
+import EmbedPlaceholder from '@wordpress/block-library/src/embed/embed-placeholder';
 
 import { __, sprintf } from '@wordpress/i18n';
 import { useState, useEffect } from '@wordpress/element';
@@ -34,7 +34,7 @@ export type EmbedEditProps = {
   insertBlocksAfter: Function;
 };
 
-/** Based on https://github.com/WordPress/gutenberg/blob/02590029e7464efafee46141b3549763dbf22cd4/packages/block-library/build-module/embed/edit.js */
+/** Based on https://github.com/WordPress/gutenberg/blob/02590029e7464efafee46141b3549763dbf22cd4/packages/block-library/src/embed/edit.js */
 export default function EmbedEdit(props: EmbedEditProps) {
   const {
     attributes,

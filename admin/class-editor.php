@@ -6,17 +6,19 @@
 class Lazy_Load_For_Videos_Editor {
 
 	function __construct() {
-		add_action( 'enqueue_block_editor_assets', array( $this, 'load_js' ) );
+		if (!function_exists('register_block_type')) {
+			// Gutenberg isn't supported
+			return;
+		}
+
+		add_action( 'enqueue_block_editor_assets', array( $this, 'enqueue' ) );
 	}
 
-	function load_js() {
-		// Enqueue block editor JS
-		// To learn how this works, check out https://jschof.com/gutenberg-blocks/using-gutenberg-filters-to-extend-blocks/
+	function enqueue() {
 		wp_enqueue_script(
 			'lazyload_editor_js',
 			LL_URL . 'assets/js/editor.js',
-			[ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components' ],
-			LL_URL
+			[ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components' ]
 		);
 	}
 }

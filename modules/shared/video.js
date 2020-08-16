@@ -15,12 +15,15 @@ export function setBackgroundImage(domNode, imageUrl) {
 
 function determineVideoRatio(element) {
   const parent = element && element.parentNode && element.parentNode.parentNode;
-  const hasAspectRatioClass = parent && parent.classList.contains('wp-has-aspect-ratio');
+  const hasAspectRatioClass =
+    parent && parent.classList.contains('wp-has-aspect-ratio');
   const classes = String(parent.classList);
-  const ratioclass = classes.substring(
-    classes.lastIndexOf('wp-embed-aspect-'),
-    classes.lastIndexOf(' '),
-  ).trim();
+  const ratioclass = classes
+    .substring(
+      classes.lastIndexOf('wp-embed-aspect-'),
+      classes.lastIndexOf(' ')
+    )
+    .trim();
 
   if (hasAspectRatioClass && ratioclass) {
     const ratioraw = ratioclass.replace('wp-embed-aspect-', '');
@@ -40,17 +43,19 @@ function determineVideoRatio(element) {
 
 export function resizeVideo(domContainerItem) {
   const videoRatio = determineVideoRatio(domContainerItem);
-  findElements('object, embed, iframe, .preview-lazyload, .lazy-load-div', domContainerItem)
-    .forEach((domItem) => {
-      const element = domItem;
-      const width = element.parentNode.clientWidth;
-      const height = Math.round(width * videoRatio);
+  findElements(
+    'object, embed, iframe, .preview-lazyload, .lazy-load-div',
+    domContainerItem
+  ).forEach((domItem) => {
+    const element = domItem;
+    const width = element.parentNode.clientWidth;
+    const height = Math.round(width * videoRatio);
 
-      element.setAttribute('height', `${height}px`);
-      element.setAttribute('width', `${width}px`);
-      element.style.height = `${height}px`;
-      element.style.width = `${width}px`;
-    });
+    element.setAttribute('height', `${height}px`);
+    element.setAttribute('width', `${width}px`);
+    element.style.height = `${height}px`;
+    element.style.width = `${width}px`;
+  });
 }
 
 const debouncedResize = debounce(() => {
@@ -69,9 +74,7 @@ function initResponsiveVideos() {
   });
 }
 
-export function init({
-  load, pluginOptions, previewVideoSelector,
-}) {
+export function init({ load, pluginOptions, previewVideoSelector }) {
   load();
 
   /*
@@ -103,9 +106,11 @@ export function inViewOnce(elements, onIntersect) {
     resizeVideo(element.parentNode);
   }
 
-  if (!('IntersectionObserver' in window)
-    && !('IntersectionObserverEntry' in window)
-    && !('intersectionRatio' in window.IntersectionObserverEntry.prototype)) {
+  if (
+    !('IntersectionObserver' in window) &&
+    !('IntersectionObserverEntry' in window) &&
+    !('intersectionRatio' in window.IntersectionObserverEntry.prototype)
+  ) {
     // Fallback for browsers without IntersectionObserver
     elements.forEach(handleIntersectElement);
     return;

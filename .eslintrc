@@ -1,15 +1,9 @@
 {
-  "extends": "airbnb-base",
-  "parser": "@typescript-eslint/parser",
-  "plugins": ["@typescript-eslint"],
+  "extends": "airbnb-typescript-prettier",
   "env": {
     "browser": true,
     "es6": true,
     "node": true
-  },
-  "parserOptions": {
-    "ecmaVersion": 8,
-    "sourceType": "module"
   },
   "globals": {
     "wp": true,
@@ -20,8 +14,11 @@
     "expect": true
   },
   "rules": {
-    "no-console": "off",
-    "no-unused-vars": ["warn"],
-    "semi": 2
+    "semi": 2,
+    "@typescript-eslint/camelcase": "off",
+    "react/react-in-jsx-scope": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "import/prefer-default-export": "off",
+    "quotes": ["error", "single"]
   }
 }

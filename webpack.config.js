@@ -102,7 +102,7 @@ const config = {
     extensions: ['*', '.ts', '.tsx', '.js', '.scss'],
   },
   output: {
-    path: `${__dirname}/assets/`,
+    path: `${__dirname}/public/`,
     filename: 'js/[name].js',
   },
   plugins: [

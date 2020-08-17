@@ -5,7 +5,7 @@
 class Lazy_Load_For_Videos_Youtube {
 	
 	function __construct() {
-		wp_enqueue_script( 'lazyload-youtube-js', LL_URL . 'assets/js/lazyload-youtube.js', null, SCRIPT_DEBUG ? null : LL_VERSION, true );
+		wp_enqueue_script( 'lazyload-youtube-js', LL_URL . 'public/js/lazyload-youtube.js', null, SCRIPT_DEBUG ? null : LL_VERSION, true );
 		wp_add_inline_script(
 			'lazyload-youtube-js',
 			'window.llv_config=window.llv_config||{};window.llv_config.youtube=' . json_encode($this->get_config()) . ';',

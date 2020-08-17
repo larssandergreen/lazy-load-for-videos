@@ -50,7 +50,7 @@ class Lazy_Load_For_Videos_Frontend {
 		$isVimeoEnabled = get_option('llv_opt') !== '1';
 
 		if ($isYoutubeEnabled || $isVimeoEnabled) {
-			wp_enqueue_script( 'lazyload-video-js', LL_URL . 'assets/js/lazyload-shared.js', null, SCRIPT_DEBUG ? null : LL_VERSION, true );
+			wp_enqueue_script( 'lazyload-video-js', LL_URL . 'public/js/lazyload-shared.js', null, SCRIPT_DEBUG ? null : LL_VERSION, true );
 		}
 
 		if ($isYoutubeEnabled) {
@@ -65,7 +65,7 @@ class Lazy_Load_For_Videos_Frontend {
 	}
 
 	function initStyles() {
-		wp_enqueue_style( 'lazyload-video-css', LL_URL . 'assets/css/lazyload-shared.css', null, SCRIPT_DEBUG ? null : LL_VERSION );
+		wp_enqueue_style( 'lazyload-video-css', LL_URL . 'public/css/lazyload-shared.css', null, SCRIPT_DEBUG ? null : LL_VERSION );
 		
 		echo '<style type="text/css">';
 		
@@ -149,11 +149,11 @@ class Lazy_Load_For_Videos_Frontend {
 	function load_lazyload_css_button_style() {
 		if ( get_option('ll_opt_button_style') == 'youtube_button_image' ) {
 			// Display youtube button image
-			echo '.lazy-load-div { background: url('.plugin_dir_url( __FILE__ ).'../assets/play-youtube.png) center center no-repeat; }';
+			echo '.lazy-load-div { background: url('.plugin_dir_url( __FILE__ ).'../public/play-youtube.png) center center no-repeat; }';
 		}
 		else if ( get_option('ll_opt_button_style') == 'youtube_button_image_red' ) {
 			// Display RED youtube button image
-			echo '.lazy-load-div { background: url('.plugin_dir_url( __FILE__ ).'../assets/play-y-red.png) center center no-repeat; }';
+			echo '.lazy-load-div { background: url('.plugin_dir_url( __FILE__ ).'../public/play-y-red.png) center center no-repeat; }';
 		}
 		else if (
 				get_option('ll_opt_button_style') == 'css_black'

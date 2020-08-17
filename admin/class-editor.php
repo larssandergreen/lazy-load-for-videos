@@ -25,3 +25,12 @@ class Lazy_Load_For_Videos_Editor {
 }
 
 new Lazy_Load_For_Videos_Editor();
+
+// function ree_youtube_player( $block_content, $block ) {
+// 	if( "core-embed/youtube" === $block['blockName'] ) {
+// 	  $not_embedded = $block['attrs']['url'];
+// 	  $block_content = str_replace( $not_embedded, wp_oembed_get($not_embedded), $block_content );
+// 	}
+// 	return $not_embedded;
+//   }
+//   add_filter( 'render_block', 'ree_youtube_player', 10, 3);

@@ -1,7 +1,7 @@
-import { onBindFirstLoad } from '../utils/jQueryBindFirst';
-import jQueryAjaxStop from '../utils/jQueryAjaxStop';
-import findElements from '../utils/findElements';
-import debounce from '../utils/debounce';
+import { onBindFirstLoad } from '../shared-utils/jQueryBindFirst';
+import jQueryAjaxStop from '../shared-utils/jQueryAjaxStop';
+import findElements from '../shared-utils/findElements';
+import debounce from '../shared-utils/debounce';
 
 export function setBackgroundImage(domNode, imageUrl) {
   const element = domNode;

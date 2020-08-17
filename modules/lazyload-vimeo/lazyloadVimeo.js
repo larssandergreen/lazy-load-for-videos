@@ -4,8 +4,8 @@ import {
   setBackgroundImage,
   inViewOnce,
 } from '../shared/video';
-import createElements from '../utils/createElements';
-import findElements from '../utils/findElements';
+import createElements from '../shared-utils/createElements';
+import findElements from '../shared-utils/findElements';
 
 /*
  * Lazy Load Vimeo

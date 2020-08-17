@@ -13,7 +13,6 @@ const config = {
   entry: {
     editor: './modules/editor/webpackEntry.ts',
     admin: './modules/admin/webpackEntry.js',
-    'lazyload-shared': './modules/lazyload-shared/webpackEntry.js',
     'lazyload-vimeo': './modules/lazyload-vimeo/webpackEntry.js',
     'lazyload-youtube': './modules/lazyload-youtube/webpackEntry.js',
   },
@@ -106,7 +105,9 @@ const config = {
     path: `${__dirname}/assets/`,
     filename: 'js/[name].js',
   },
-  plugins: [extractCSS],
+  plugins: [
+    extractCSS,
+  ],
   externals: {
     // Manually import used WP packages because if we would use
     // "@wordpress/dependency-extraction-webpack-plugin" instead,
@@ -122,6 +123,23 @@ const config = {
     '@wordpress/blocks': 'wp.blocks',
     '@wordpress/block-editor': 'wp.blockEditor',
     lodash: 'lodash',
+  },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        // Move shared code into a separate bundle
+        sharedProduction: {
+          name: 'lazyload-shared',
+          test: /\/shared(-utils)?\//,
+          chunks(chunk) {
+            // Exclude chunks
+            return chunk.name !== 'admin' && chunk.name !== 'editor';
+          },
+          priority: -10,
+          minSize: 0,
+        },
+      },
+    },
   },
 };
 

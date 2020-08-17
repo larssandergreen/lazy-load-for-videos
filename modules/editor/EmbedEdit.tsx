@@ -7,6 +7,8 @@ import {
   getAttributesFromPreview,
 } from '@wordpress/block-library/src/embed/util';
 import EmbedControls from '@wordpress/block-library/src/embed/embed-controls';
+import EmbedPreview from '@wordpress/block-library/src/embed/embed-preview';
+import WpEmbedPreview from '@wordpress/block-library/src/embed/wp-embed-preview';
 import EmbedLoading from '@wordpress/block-library/src/embed/embed-loading';
 import EmbedPlaceholder from '@wordpress/block-library/src/embed/embed-placeholder';
 
@@ -45,7 +47,6 @@ export default function EmbedEdit(props: EmbedEditProps) {
   } = props;
   const {
     providerNameSlug,
-    previewable,
     responsive,
     url: attributesUrl,
     allowResponsive,
@@ -75,6 +76,7 @@ export default function EmbedEdit(props: EmbedEditProps) {
         | { data?: { status: number }; html?: string }
         | undefined = getEmbedPreview(attributesUrl);
       const previewIsFallback = isPreviewEmbedFallback(attributesUrl);
+      // console.log('preview', embedPreview);
 
       // Some WordPress URLs that can't be embedded will cause the API to return
       // a valid JSON response with no HTML and `data.status` set to 404, rather
@@ -201,7 +203,6 @@ export default function EmbedEdit(props: EmbedEditProps) {
   // that `getMergedAttributes` uses is memoized so that we're not
   const {
     caption,
-    type,
     allowResponsive: allowResponsiveFromPreview,
     className: classFromPreview,
   } = getMergedAttributes();
@@ -216,13 +217,42 @@ export default function EmbedEdit(props: EmbedEditProps) {
         toggleResponsive={toggleResponsive}
         switchBackToURLInput={() => setIsEditingURL(true)}
       />
-      <EmbedEditPreview
-        preview={<VideoPreview url={url} />}
+      {/* <EmbedPreview
+        // preview={<VideoPreview url={url} />}
+        preview={preview}
+        previewable
         className={combinedClassName}
         url={url}
         caption={caption}
-        onCaptionChange={(value: InputEvent) => setAttributes({ caption: value })
-        }
+        onCaptionChange={(value: InputEvent) => setAttributes({ caption: value })}
+        isSelected={isSelected}
+        icon={icon}
+        label={label}
+        insertBlocksAfter={insertBlocksAfter}
+      /> */}
+      {/* <EmbedEditPreview
+        preview={preview.html && <WpEmbedPreview html={preview.html} />}
+        className={combinedClassName}
+        url={url}
+        caption={caption}
+        onCaptionChange={(value: InputEvent) => setAttributes({ caption: value })}
+        isSelected={isSelected}
+        icon={icon}
+        label={label}
+        insertBlocksAfter={insertBlocksAfter}
+      /> */}
+      <EmbedPreview
+        // preview={preview.html && <WpEmbedPreview html={preview.html} />}
+        preview={preview}
+        // This type is important: Setting it to "wp-embed" makes the preview component render
+        // the HTML directly instead of in an iframe
+        type="wp-embed"
+        // Manually set "previewable" because otherwise the value isn't
+        previewable
+        className={combinedClassName}
+        url={url}
+        caption={caption}
+        onCaptionChange={(value: InputEvent) => setAttributes({ caption: value })}
         isSelected={isSelected}
         icon={icon}
         label={label}

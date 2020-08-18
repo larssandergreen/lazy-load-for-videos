@@ -159,6 +159,7 @@ Note that playlists are not working when you're using the pre-/post-roll feature
 * Increase minimum WordPress version to 4.5
 * The Youtube and Video configs are now stored in window.llvConfig instead of window.lazyload_video_settings
 * Remove RTL-specific CSS used for admin panel because it wasn't properly maintained
+* Delete oembed caches when uninstalling plugin, not just when deactivating it
 
 = 2.8.7 =
 * Fix: White arrow was overlaying the red Youtube play button

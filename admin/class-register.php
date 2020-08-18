@@ -5,6 +5,7 @@
  */
 register_activation_hook( LL_FILE, 'lazyloadvideos_plugin_activation' );
 register_deactivation_hook( LL_FILE, 'lazyloadvideos_plugin_deactivation' );
+register_uninstall_hook( LL_FILE, 'lazyloadvideos_plugin_deactivation');
 
 function lazyloadvideos_plugin_activation() {
 	$signup = '<div id="mc_embed_signup">

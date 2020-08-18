@@ -5,5 +5,5 @@ import lazyloadVimeo from './lazyloadVimeo';
 
 onReady(() => {
   jQueryBindFirst();
-  lazyloadVimeo(window.llv_config.vimeo);
+  lazyloadVimeo(window.llvConfig.vimeo);
 });

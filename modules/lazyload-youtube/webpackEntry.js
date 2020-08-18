@@ -5,5 +5,5 @@ import lazyloadYoutube from './lazyloadYoutube';
 
 onReady(() => {
   jQueryBindFirst();
-  lazyloadYoutube(window.llv_config.youtube);
+  lazyloadYoutube(window.llvConfig.youtube);
 });

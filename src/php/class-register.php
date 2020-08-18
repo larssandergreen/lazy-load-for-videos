@@ -40,7 +40,7 @@ function lazyloadvideos_plugin_deactivation() {
 }
 
 function lazyloadvideos_update_posts_with_embed() {
-	require_once( './class-update-posts.php' );
+	require_once( LL_PATH . 'src/php/class-update-posts.php' );
 	$lazyload_admin = new Lazy_Load_For_Videos_Update_Posts();
 	$lazyload_admin->delete_oembed_caches();
 }
@@ -70,7 +70,7 @@ class Lazy_Load_For_Videos_Register {
 	 * @since 2.0.3
 	 */
 	function delete_oembed_cache( $post_id ) {
-		require_once( './class-update-posts.php' );
+		require_once( LL_PATH . 'src/php/class-update-posts.php' );
 		$lazyload_admin = new Lazy_Load_For_Videos_Update_Posts();
 		$lazyload_admin->delete_oembed_cache( $post_id );
 	}

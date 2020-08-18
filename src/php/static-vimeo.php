@@ -1,7 +1,4 @@
 <?php
-/**
- * @package Lazyload Vimeo
- */
 class Lazy_Load_For_Videos_Vimeo {
 
 	static function enqueue() {

@@ -11,10 +11,10 @@ const IS_DEV = process.env.NODE_ENV === 'development';
 const config = {
   mode: IS_DEV ? 'development' : 'production',
   entry: {
-    editor: './modules/editor/webpackEntry.ts',
-    admin: './modules/admin/webpackEntry.js',
-    'lazyload-vimeo': './modules/lazyload-vimeo/webpackEntry.js',
-    'lazyload-youtube': './modules/lazyload-youtube/webpackEntry.js',
+    editor: './src/frontend/editor/webpackEntry.ts',
+    admin: './src/frontend/admin/webpackEntry.js',
+    'lazyload-vimeo': './src/frontend/lazyload-vimeo/webpackEntry.js',
+    'lazyload-youtube': './src/frontend/lazyload-youtube/webpackEntry.js',
   },
   module: {
     rules: [

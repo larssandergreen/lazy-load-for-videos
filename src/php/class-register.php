@@ -1,7 +1,6 @@
 <?php
 /**
  * register_activation_hook() and register_deactivation_hook() MUST NOT be called with action 'plugins_loaded' or any 'admin_init'
- * @package Admin
  */
 register_activation_hook( LL_FILE, 'lazyloadvideos_plugin_activation' );
 register_deactivation_hook( LL_FILE, 'lazyloadvideos_plugin_deactivation' );
@@ -41,7 +40,7 @@ function lazyloadvideos_plugin_deactivation() {
 }
 
 function lazyloadvideos_update_posts_with_embed() {
-	require_once( LL_PATH . 'admin/inc/class-update-posts.php' );
+	require_once( './class-update-posts.php' );
 	$lazyload_admin = new Lazy_Load_For_Videos_Update_Posts();
 	$lazyload_admin->delete_oembed_caches();
 }
@@ -71,7 +70,7 @@ class Lazy_Load_For_Videos_Register {
 	 * @since 2.0.3
 	 */
 	function delete_oembed_cache( $post_id ) {
-		require_once( LL_PATH . 'admin/inc/class-update-posts.php' );
+		require_once( './class-update-posts.php' );
 		$lazyload_admin = new Lazy_Load_For_Videos_Update_Posts();
 		$lazyload_admin->delete_oembed_cache( $post_id );
 	}

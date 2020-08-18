@@ -1,8 +1,4 @@
 <?php
-/**
- * @package Admin
- */
-
 class Lazy_Load_For_Videos_Editor {
 
 	function __construct() {
@@ -34,7 +30,7 @@ class Lazy_Load_For_Videos_Editor {
 			SCRIPT_DEBUG ? null : LL_VERSION
 		);
 
-		require( LL_PATH . 'frontend/class-styles.php' );
+		require( LL_PATH . 'src/php/static-styles.php' );
 		Lazy_Load_For_Videos_Styles::enqueue();
 
 		if ($isYoutubeEnabled) {
@@ -46,7 +42,7 @@ class Lazy_Load_For_Videos_Editor {
 	}
 
 	function initScriptYoutube() {
-		require( LL_PATH . 'frontend/class-youtube.php' );
+		require( LL_PATH . 'src/php/static-youtube.php' );
 		wp_add_inline_script(
 			'lazyload-editor-js',
 			Lazy_Load_For_Videos_Youtube::get_inline_script(),
@@ -55,7 +51,7 @@ class Lazy_Load_For_Videos_Editor {
 	}
 
 	function initScriptVimeo() {
-		require( LL_PATH . 'frontend/class-vimeo.php' );
+		require( LL_PATH . 'src/php/static-vimeo.php' );
 		wp_add_inline_script(
 			'lazyload-editor-js',
 			Lazy_Load_For_Videos_Vimeo::get_inline_script(),

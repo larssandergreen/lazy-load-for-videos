@@ -1,7 +1,4 @@
 <?php
-/**
- * @package Lazyload Youtube
- */
 class Lazy_Load_For_Videos_Youtube {
 	
 	static function enqueue() {

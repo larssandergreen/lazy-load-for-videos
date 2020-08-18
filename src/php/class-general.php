@@ -1,7 +1,4 @@
 <?php
-/**
- * @package General (needed for both: admin and frontend)
- */
 class Lazy_Load_For_Videos_General {
 
 	// Don't change those strings since exactly those strings are needed by the Youtube JavaScript file

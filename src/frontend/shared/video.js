@@ -74,13 +74,13 @@ function initResponsiveVideos() {
 }
 
 export function init({ load, pluginOptions, previewVideoSelector }) {
-  load();
+  load(pluginOptions);
 
   /*
    * Use ajaxStop function to prevent plugin from breaking when another plugin uses Ajax
    */
   jQueryAjaxStop(() => {
-    load();
+    load(pluginOptions);
     resizeResponsiveVideos();
   });
 

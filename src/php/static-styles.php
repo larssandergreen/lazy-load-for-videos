@@ -1,9 +1,4 @@
 <?php
-require_once( LL_PATH . 'admin/class-editor.php' );
-
-/**
- * @package Frontend
- */
 class Lazy_Load_For_Videos_Styles {
 
 	static function enqueue() {

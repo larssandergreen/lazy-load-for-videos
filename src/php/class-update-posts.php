@@ -1,7 +1,4 @@
 <?php
-/**
- * @package Admin
- */
 class Lazy_Load_For_Videos_Update_Posts {
 
 	/**

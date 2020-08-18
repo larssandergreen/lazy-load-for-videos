@@ -1,8 +1,4 @@
 <?php
-/**
- * @package Admin
- */
-
 class Lazy_Load_For_Videos_Meta {
 
 	private $select_thumbnail_quality = 'lazyload_thumbnail_quality';

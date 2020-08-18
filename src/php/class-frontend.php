@@ -1,16 +1,11 @@
 <?php
-require_once( LL_PATH . 'admin/class-editor.php' );
-
-/**
- * @package Frontend
- */
 class Lazy_Load_For_Videos_Frontend {
 
 	function __construct() {
 		$should_load_scripts = apply_filters( 'lazyload_videos_should_scripts_be_loaded', $this->should_scripts_be_loaded());
 
 		if ($should_load_scripts) {
-			require( LL_PATH . 'frontend/class-styles.php' );
+			require( LL_PATH . 'src/php/static-styles.php' );
 			Lazy_Load_For_Videos_Styles::enqueue();
 			$this->initScripts();
 		}
@@ -55,12 +50,12 @@ class Lazy_Load_For_Videos_Frontend {
 		}
 
 		if ($isYoutubeEnabled) {
-			require( LL_PATH . 'frontend/class-youtube.php' );
+			require( LL_PATH . 'src/php/static-youtube.php' );
 			Lazy_Load_For_Videos_Youtube::enqueue();	
 		}
 		
 		if ($isVimeoEnabled) {
-			require( LL_PATH . 'frontend/class-vimeo.php' );
+			require( LL_PATH . 'src/php/static-vimeo.php' );
 			Lazy_Load_For_Videos_Vimeo::enqueue();	
 		}
 	}

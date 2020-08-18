@@ -1,7 +1,6 @@
 <?php
 /**
  * Create options panel (https://codex.wordpress.org/Creating_Options_Pages)
- * @package Admin
  */
 class Lazy_Load_For_Videos_Admin {
 	function __construct() {

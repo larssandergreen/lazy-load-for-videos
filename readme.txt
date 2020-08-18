@@ -15,6 +15,8 @@ Speed up your site by replacing embedded Youtube and Vimeo videos with a clickab
 This plugin improves page load times and increases your Google PageSpeed Score. It replaces embedded Youtube and Vimeo videos with a clickable preview image.
 By loading videos only when the user clicks on the preview image, no unnecessary JavaScript is loaded. Especially on sites with many embedded videos this will make your visitors happy. Additionally, all Youtube videos are loaded in a privacy-enhanced mode using the "https://www.youtube-nocookie.com" embed URL.
 
+This plugin works for your existing YouTube and Vimeo blocks. No vendor lock-in and no custom shortcodes: Easily turn the plugin on and off anytime.
+
 Demo on the developer’s website: [www.kweber.com/lazy-load-videos/](https://www.kweber.com/lazy-load-videos/)
 
 You want to enhance this plugin? Please [contribute on Github](https://github.com/kevinweber/lazy-load-for-videos).
@@ -148,13 +150,15 @@ Note that playlists are not working when you're using the pre-/post-roll feature
 == Changelog ==
 
 = 2.9.0 =
-* Change browser support from IE10 to IE11
+* Change minimum browser support from IE10 to IE11
 * Smarter code splitting: Now Webpack splits shared code into separate bundles so that developers don't need to manually maintain an extra Webpack entry. WordPress will load up three JS files if both Youtube and Vimeo are supported on your blog: lazyload-shared.js, lazyload-youtube.js, lazyload-vimeo.js, instead of one big lazyload-all.js
 * Allow filtering Vimeo-specific CSS classes using "lazyload_preview_url_css_vimeo" filter
 * Rename folder "assets" to "public"
 * Rename filter lazyload_preview_url_a_class_youtube to lazyload_preview_url_class_youtube
-* Use "wp_add_inline_script" instead of "wp_localize_script" and simplify the PHP code
+* Use "wp_add_inline_script" (requires WordPress 4.5 or higher) instead of "wp_localize_script" and improve how scripts are being loaded
+* Increase minimum WordPress version to 4.5
 * The Youtube and Video configs are now stored in window.llv_config instead of window.lazyload_video_settings
+* Remove RTL-specific CSS used for admin panel because it wasn't properly maintained
 
 = 2.8.7 =
 * Fix: White arrow was overlaying the red Youtube play button

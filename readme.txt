@@ -157,7 +157,7 @@ Note that playlists are not working when you're using the pre-/post-roll feature
 * Rename filter lazyload_preview_url_a_class_youtube to lazyload_preview_url_class_youtube
 * Use "wp_add_inline_script" (requires WordPress 4.5 or higher) instead of "wp_localize_script" and improve how scripts are being loaded
 * Increase minimum WordPress version to 4.5
-* The Youtube and Video configs are now stored in window.llv_config instead of window.lazyload_video_settings
+* The Youtube and Video configs are now stored in window.llvConfig instead of window.lazyload_video_settings
 * Remove RTL-specific CSS used for admin panel because it wasn't properly maintained
 
 = 2.8.7 =

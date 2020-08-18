@@ -28,7 +28,7 @@ function determineVideoRatio(element) {
     const ratioraw = ratioclass.replace('wp-embed-aspect-', '');
     const splitratio = ratioraw.split('-');
     const result = Number(splitratio[1]) / Number(splitratio[0]);
-    const countDec = result.toString().split('.')[1].length;
+    const countDec = result.toString().split('.')[1]?.length;
 
     if (countDec > 4) {
       return Math.round(result * 10000) / 10000;

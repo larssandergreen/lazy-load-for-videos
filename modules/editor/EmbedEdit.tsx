@@ -1,4 +1,3 @@
-/* eslint-disable import/no-extraneous-dependencies */
 import classnames from 'classnames';
 import {
   createUpgradedEmbedBlock,
@@ -8,16 +7,19 @@ import {
 } from '@wordpress/block-library/src/embed/util';
 import EmbedControls from '@wordpress/block-library/src/embed/embed-controls';
 import EmbedPreview from '@wordpress/block-library/src/embed/embed-preview';
-import WpEmbedPreview from '@wordpress/block-library/src/embed/wp-embed-preview';
 import EmbedLoading from '@wordpress/block-library/src/embed/embed-loading';
 import EmbedPlaceholder from '@wordpress/block-library/src/embed/embed-placeholder';
-
+// @ts-expect-error
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { __, sprintf } from '@wordpress/i18n';
-import { useState, useEffect } from '@wordpress/element';
+import {
+  useState, useEffect, useRef, useCallback,
+  // @ts-expect-error
+  // eslint-disable-next-line import/no-extraneous-dependencies
+} from '@wordpress/element';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { useDispatch, useSelect } from '@wordpress/data';
-import getVariation, { ProviderName } from './getVariation';
-import EmbedEditPreview from './EmbedEditPreview';
-import VideoPreview from './VideoPreview';
+import getVariation, { ProviderName, RefProps } from './getVariation';
 
 export type EmbedEditProps = {
   attributes: {
@@ -53,10 +55,17 @@ export default function EmbedEdit(props: EmbedEditProps) {
     className,
   } = attributes;
 
-  const { icon, title } = getVariation(providerNameSlug);
+  const { icon, title, init } = getVariation(providerNameSlug);
   const [url, setURL] = useState(attributesUrl);
   const [isEditingURL, setIsEditingURL] = useState(false);
   const { invalidateResolution } = useDispatch('core/data');
+  const [domNode, setDomNode] = useState(null);
+  const blockRef = (node: RefProps) => setDomNode(node);
+
+  useEffect(() => {
+    if (!domNode) return;
+    init(domNode);
+  }, [domNode, init]);
 
   const {
     preview, fetching, themeSupportsResponsive, cannotEmbed,
@@ -76,7 +85,6 @@ export default function EmbedEdit(props: EmbedEditProps) {
         | { data?: { status: number }; html?: string }
         | undefined = getEmbedPreview(attributesUrl);
       const previewIsFallback = isPreviewEmbedFallback(attributesUrl);
-      // console.log('preview', embedPreview);
 
       // Some WordPress URLs that can't be embedded will cause the API to return
       // a valid JSON response with no HTML and `data.status` set to 404, rather
@@ -97,7 +105,7 @@ export default function EmbedEdit(props: EmbedEditProps) {
   /**
    * @return {Object} Attributes derived from the preview, merged with the current attributes.
    */
-  const getMergedAttributes = () => ({
+  const getMergedAttributes = useCallback(() => ({
     ...attributes,
     ...getAttributesFromPreview(
       preview,
@@ -106,7 +114,7 @@ export default function EmbedEdit(props: EmbedEditProps) {
       responsive,
       allowResponsive,
     ),
-  });
+  }), [allowResponsive, attributes, className, preview, responsive, title]);
 
   const toggleResponsive = () => {
     const { html } = preview;
@@ -132,7 +140,7 @@ export default function EmbedEdit(props: EmbedEditProps) {
     setURL(newURL);
     setIsEditingURL(false);
     setAttributes({ url: newURL });
-  }, [preview?.html, attributesUrl]);
+  }, [preview?.html, attributesUrl, cannotEmbed, fetching, setAttributes]);
 
   // Handle incoming preview
   useEffect(() => {
@@ -157,7 +165,7 @@ export default function EmbedEdit(props: EmbedEditProps) {
         }
       }
     }
-  }, [preview, isEditingURL]);
+  }, [preview, isEditingURL, getMergedAttributes, onReplace, props, setAttributes]);
 
   if (fetching) {
     return <EmbedLoading />;
@@ -208,7 +216,7 @@ export default function EmbedEdit(props: EmbedEditProps) {
   } = getMergedAttributes();
   const combinedClassName = classnames(classFromPreview, props.className);
   return (
-    <>
+    <div ref={blockRef}>
       <EmbedControls
         showEditButton={preview && !cannotEmbed}
         themeSupportsResponsive={themeSupportsResponsive}
@@ -217,30 +225,7 @@ export default function EmbedEdit(props: EmbedEditProps) {
         toggleResponsive={toggleResponsive}
         switchBackToURLInput={() => setIsEditingURL(true)}
       />
-      {/* <EmbedPreview
-        // preview={<VideoPreview url={url} />}
-        preview={preview}
-        previewable
-        className={combinedClassName}
-        url={url}
-        caption={caption}
-        onCaptionChange={(value: InputEvent) => setAttributes({ caption: value })}
-        isSelected={isSelected}
-        icon={icon}
-        label={label}
-        insertBlocksAfter={insertBlocksAfter}
-      /> */}
-      {/* <EmbedEditPreview
-        preview={preview.html && <WpEmbedPreview html={preview.html} />}
-        className={combinedClassName}
-        url={url}
-        caption={caption}
-        onCaptionChange={(value: InputEvent) => setAttributes({ caption: value })}
-        isSelected={isSelected}
-        icon={icon}
-        label={label}
-        insertBlocksAfter={insertBlocksAfter}
-      /> */}
+      {/* @ts-expect-error */}
       <EmbedPreview
         // preview={preview.html && <WpEmbedPreview html={preview.html} />}
         preview={preview}
@@ -258,6 +243,6 @@ export default function EmbedEdit(props: EmbedEditProps) {
         label={label}
         insertBlocksAfter={insertBlocksAfter}
       />
-    </>
+    </div>
   );
 }

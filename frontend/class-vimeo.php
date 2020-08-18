@@ -8,7 +8,7 @@ class Lazy_Load_For_Videos_Vimeo {
 		wp_enqueue_script( 'lazyload-vimeo-js', LL_URL . 'public/js/lazyload-vimeo.js', null, SCRIPT_DEBUG ? null : LL_VERSION, true );
 		wp_add_inline_script(
 			'lazyload-vimeo-js',
-			'window.llv_config=window.llv_config||{};window.llv_config.vimeo=' . json_encode($this->get_config()) . ';',
+			'window.llvConfig=window.llvConfig||{};window.llvConfig.vimeo=' . json_encode($this->get_config()) . ';',
 			'before'
 		);
 	}

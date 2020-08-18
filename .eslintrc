@@ -14,7 +14,7 @@
   },
   "globals": {
     "wp": true,
-    "llv_config": true,
+    "llvConfig": true,
     // Jest globals
     "describe": true,
     "it": true,

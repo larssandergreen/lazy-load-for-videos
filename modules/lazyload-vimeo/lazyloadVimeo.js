@@ -16,7 +16,7 @@ import findElements from '../shared-utils/findElements';
 window.showThumb = (data) => {
   const relevantData = data[0];
 
-  if (window.llv_config.vimeo.loadthumbnail) {
+  if (window.llvConfig.vimeo.loadthumbnail) {
     findElements(`[id="${relevantData.id}"]`).forEach((domItem) => {
       setBackgroundImage(domItem, relevantData.thumbnail_large);
     });
@@ -58,7 +58,7 @@ function vimeoLoadingThumb(videoLinkElement, id) {
   );
   videoLinkElement.appendChild(playButtonDiv);
 
-  if (window.llv_config.vimeo.loadthumbnail) {
+  if (window.llvConfig.vimeo.loadthumbnail) {
     const videoThumbnail = videoLinkElement.getAttribute(
       'data-video-thumbnail',
     );
@@ -74,7 +74,7 @@ function vimeoLoadingThumb(videoLinkElement, id) {
     }
   }
 
-  if (window.llv_config.vimeo.show_title) {
+  if (window.llvConfig.vimeo.show_title) {
     const videoTitle = videoLinkElement.getAttribute('data-video-title');
     const info = createElements(
       `<div aria-hidden="true" class="lazy-load-info"><span class="titletext vimeo">${videoTitle}</span></div>`,

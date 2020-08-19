@@ -226,15 +226,18 @@ function loadVideo(domNode) {
       )}" style="vertical-align:top;" src="${embedUrl}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`,
     );
 
-    eventTarget.parentNode.replaceChild(videoIFrame, eventTarget);
+    const { parentNode } = eventTarget;
+    if (parentNode) {
+      parentNode.replaceChild(videoIFrame, eventTarget);
+    }
   });
 }
 
-function load() {
-  const videoLinkElements = findElements('a.lazy-load-youtube');
+function load({ rootNode, loadthumbnail }) {
+  const videoLinkElements = findElements('a.lazy-load-youtube', rootNode);
   videoLinkElements.forEach(loadVideo);
 
-  if (pluginOptions.loadthumbnail) {
+  if (loadthumbnail) {
     inViewOnce(videoLinkElements, (element) => setBackgroundImg(element));
   }
 }
@@ -248,7 +251,6 @@ function lazyloadYoutube(options) {
   init({
     load,
     pluginOptions,
-    previewVideoSelector: `.${classPreviewYoutube}`,
   });
 }
 

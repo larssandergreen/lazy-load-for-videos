@@ -130,12 +130,16 @@ function vimeoThumbnailEventListeners(videoLinkElement) {
         10,
       )}px;width:100%" frameborder="0" webkitAllowFullScreen mozallowfullscreen autoPlay allowFullScreen allow=autoplay></iframe>`,
     );
-    eventTarget.parentNode.replaceChild(videoIFrame, eventTarget);
+
+    const { parentNode } = eventTarget;
+    if (parentNode) {
+      parentNode.replaceChild(videoIFrame, eventTarget);
+    }
   });
 }
 
-function load() {
-  findElements(`.${classPreviewVimeo}`).forEach((domItem) => {
+function load({ rootNode }) {
+  findElements(`.${classPreviewVimeo}`, rootNode).forEach((domItem) => {
     vimeoCreateThumbProcess(domItem);
     resizeVideo(domItem.parentNode);
     vimeoThumbnailEventListeners(domItem);
@@ -151,7 +155,6 @@ const lazyloadVimeo = (options) => {
   init({
     load,
     pluginOptions,
-    previewVideoSelector: `.${classPreviewVimeo}`,
   });
 };
 

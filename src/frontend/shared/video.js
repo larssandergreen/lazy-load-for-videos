@@ -1,7 +1,5 @@
-import { onBindFirstLoad } from '../shared-utils/jQueryBindFirst';
 import jQueryAjaxStop from '../shared-utils/jQueryAjaxStop';
 import findElements from '../shared-utils/findElements';
-import debounce from '../shared-utils/debounce';
 
 export function setBackgroundImage(domNode, imageUrl) {
   const element = domNode;
@@ -57,23 +55,15 @@ export function resizeVideo(domContainerItem) {
   });
 }
 
-const debouncedResize = debounce(() => {
-  findElements('.container-lazyload').forEach(resizeVideo);
-}, 100);
-
-export function resizeResponsiveVideos() {
-  debouncedResize();
-}
-
-function initResponsiveVideos() {
-  onBindFirstLoad(resizeResponsiveVideos);
-  window.addEventListener('resize', resizeResponsiveVideos);
-  window.addEventListener('load', () => {
-    resizeResponsiveVideos();
+function resizeResponsiveVideos(rootNode) {
+  requestAnimationFrame(() => {
+    findElements('.container-lazyload', rootNode).forEach(resizeVideo);
   });
 }
 
-export function init({ load, pluginOptions, previewVideoSelector }) {
+export function init({ load, pluginOptions }) {
+  const { rootNode } = pluginOptions;
+  const resizeFunc = () => resizeResponsiveVideos(rootNode);
   load(pluginOptions);
 
   /*
@@ -81,10 +71,11 @@ export function init({ load, pluginOptions, previewVideoSelector }) {
    */
   jQueryAjaxStop(() => {
     load(pluginOptions);
-    resizeResponsiveVideos();
+    resizeResponsiveVideos(rootNode);
   });
 
-  initResponsiveVideos(previewVideoSelector);
+  window.addEventListener('resize', resizeFunc);
+  window.addEventListener('load', resizeFunc);
 
   if (typeof pluginOptions.callback === 'function') {
     pluginOptions.callback();

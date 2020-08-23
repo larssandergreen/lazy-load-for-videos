@@ -14,7 +14,8 @@ class Lazy_Load_For_Videos_Update_Posts {
 		$wpdb->query(
 	        $query = $wpdb->prepare( 
                 "DELETE FROM `".$wpdb->postmeta."`
-                    WHERE `meta_key` LIKE %s ESCAPE '|'",
+                    WHERE `meta_key` LIKE %s ESCAPE '|'
+                        OR `meta_key` LIKE %s ESCAPE '|'",
 	          	$meta_key_1,
 	          	$meta_key_2
 	        )
@@ -35,6 +36,7 @@ class Lazy_Load_For_Videos_Update_Posts {
                     WHERE post_id = %d
                     	AND (
                     		`meta_key` LIKE %s ESCAPE '|'
+                        	OR `meta_key` LIKE %s ESCAPE '|'
                         	)",
 	          	$post_id,
 	          	$meta_key_1,

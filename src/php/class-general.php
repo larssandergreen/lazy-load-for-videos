@@ -66,17 +66,22 @@ class Lazy_Load_For_Videos_General {
 		}
 
 		// When the individual status for a page/post is '0', all the other settings don't matter.
-		if ( get_post_meta( $id, 'lazyload_thumbnail_quality', true ) && get_post_meta( $id, 'lazyload_thumbnail_quality', true ) === $this->thumbnailquality_default ) {
-			return $thumbnailquality;
-		}
-		elseif (
-			( get_post_meta( $id, 'lazyload_thumbnail_quality', true ) && get_post_meta( $id, 'lazyload_thumbnail_quality', true ) === 'max' )
-			|| ( ( get_post_meta( $id, 'lazyload_thumbnail_quality', true ) !== $this->thumbnailquality_default ) && ( get_option('lly_opt_thumbnail_quality') === 'max' ) )
+		$thumbnail_quality = get_post_meta( $id, 'lazyload_thumbnail_quality', true );
+		if (
+			$thumbnail_quality === 'max'
+			|| ( empty($thumbnail_quality) && ( get_option('lly_opt_thumbnail_quality') === 'max' ) )
 			) {
-			$thumbnailquality = $this->thumbnailquality_maxresdefault;
+			return $this->thumbnailquality_maxresdefault;
 		}
 
-		return $thumbnailquality;
+		if (
+			$thumbnail_quality === 'basic'
+			|| ( empty($thumbnail_quality) && ( get_option('lly_opt_thumbnail_quality') === 'basic' ) )
+			) {
+			return $this->thumbnailquality_maxresdefault;
+		}
+
+		return $this->thumbnailquality_default;
  	}
 
 }

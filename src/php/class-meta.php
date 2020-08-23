@@ -63,7 +63,7 @@ class Lazy_Load_For_Videos_Meta {
 			<select class="select" type="select" name="<?php echo $select_thumbnail_quality; ?>" id="<?php $select_thumbnail_quality; ?>">
 			<?php $meta_element_class = get_post_meta($post->ID, $select_thumbnail_quality, true);	?>
 		      <option value="default" <?php selected( $meta_element_class, 'default' ); ?>><?php esc_html_e( 'Default', LL_TD ); ?></option>
-		      <option value="0" <?php selected( $meta_element_class, '0' ); ?>><?php esc_html_e( 'Standard quality', LL_TD ); ?></option>
+		      <option value="basic" <?php selected( $meta_element_class, 'basic' ); ?>><?php esc_html_e( 'Standard quality', LL_TD ); ?></option>
 		      <option value="max" <?php selected( $meta_element_class, 'max' ); ?>><?php esc_html_e( 'Max resolution', LL_TD ); ?></option>
 			</select>
 		</p>
@@ -97,8 +97,12 @@ class Lazy_Load_For_Videos_Meta {
 
 		// SELECT
 		$select_thumbnail_quality = $this->select_thumbnail_quality;
-		if( isset( $_POST[$select_thumbnail_quality] ) )
-			update_post_meta( $post_id, $select_thumbnail_quality, esc_attr( $_POST[$select_thumbnail_quality] ) );	
+		$post_thumbnail_quality = $_POST[$select_thumbnail_quality];
+		if ( empty($post_thumbnail_quality) || $post_thumbnail_quality == 'default' ) {
+			delete_post_meta( $post_id, $select_thumbnail_quality );
+		} else {
+			update_post_meta( $post_id, $select_thumbnail_quality, esc_attr( $post_thumbnail_quality ) );	
+		}
 	}
 
 }

@@ -214,7 +214,8 @@ export default function EmbedEdit(props: EmbedEditProps) {
     allowResponsive: allowResponsiveFromPreview,
     className: classFromPreview,
   } = getMergedAttributes();
-  const combinedClassName = classnames(classFromPreview, props.className);
+  const combinedClassName = classnames(classFromPreview, props.className, !isSelected && 'lazy-load-block-play');
+
   return (
     <div ref={blockRef}>
       <EmbedControls

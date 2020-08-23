@@ -143,3 +143,11 @@ a.lazy-load-youtube {
         width: 100%;
     }
 }
+
+.lazy-load-block-play {
+	cursor: pointer;
+}
+
+.lazy-load-block-play .preview-lazyload {
+	pointer-events: none;
+}

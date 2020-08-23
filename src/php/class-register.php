@@ -1,5 +1,5 @@
 <?php
-require_once( LL_PATH . 'src/php/class-update-posts.php' );
+require_once( LL_PATH . 'src/php/static-update-posts.php' );
 /**
  * register_activation_hook() and register_deactivation_hook() MUST NOT be called with action 'plugins_loaded' or any 'admin_init'
  */
@@ -31,24 +31,17 @@ function lazyloadvideos_plugin_activation() {
 					</strong>';
 				;
 	update_option( 'lazyloadvideos_deferred_admin_notices', $notices );
-
-	lazyloadvideos_update_posts_with_embed();
+	Lazy_Load_For_Videos_Update_Posts::delete_oembed_caches();
 }
 
 function lazyloadvideos_plugin_deactivation() {
 	delete_option( 'lazyloadvideos_deferred_admin_notices' );
-	lazyloadvideos_update_posts_with_embed();
+	Lazy_Load_For_Videos_Update_Posts::delete_oembed_caches();
 }
 
 function lazyloadvideos_plugin_uninstall() {
 	lazyloadvideos_plugin_deactivation();
-	$lazyload_admin = new Lazy_Load_For_Videos_Update_Posts();
-	$lazyload_admin->delete_postmeta();
-}
-
-function lazyloadvideos_update_posts_with_embed() {
-	$lazyload_admin = new Lazy_Load_For_Videos_Update_Posts();
-	$lazyload_admin->delete_oembed_caches();
+	Lazy_Load_For_Videos_Update_Posts::delete_postmeta();
 }
 
 class Lazy_Load_For_Videos_Register {
@@ -76,9 +69,7 @@ class Lazy_Load_For_Videos_Register {
 	 * @since 2.0.3
 	 */
 	function delete_oembed_cache( $post_id ) {
-		require_once( LL_PATH . 'src/php/class-update-posts.php' );
-		$lazyload_admin = new Lazy_Load_For_Videos_Update_Posts();
-		$lazyload_admin->delete_oembed_cache( $post_id );
+		Lazy_Load_For_Videos_Update_Posts::delete_oembed_cache( $post_id );
 	}
 
 	/**
@@ -89,7 +80,7 @@ class Lazy_Load_For_Videos_Register {
       $version = get_option(LL_VERSION_KEY);
       
       if (!$version || version_compare($version, '2.2.3', '<')) {
-        lazyloadvideos_update_posts_with_embed();
+        Lazy_Load_For_Videos_Update_Posts::delete_oembed_caches();
       }
       
       if (!$version || version_compare($version, LL_VERSION, '<')) {

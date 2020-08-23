@@ -1,7 +1,7 @@
 <?php
 class Lazy_Load_For_Videos_Update_Posts {
 
-	function delete_postmeta() {
+	static function delete_postmeta() {
 		global $wpdb;
 		$meta_key_1 = "lazyload_thumbnail_quality";
 		$wpdb->query(
@@ -19,7 +19,7 @@ class Lazy_Load_For_Videos_Update_Posts {
 	 *
 	 * @since 1.6.2
 	 */
-	function delete_oembed_caches() {
+	static function delete_oembed_caches() {
 		global $wpdb;
 		$meta_key_1 = "|_oembed|_%%";
 		$meta_key_2 = "|_oembed|_time|_%%";
@@ -38,7 +38,7 @@ class Lazy_Load_For_Videos_Update_Posts {
 	 * Delete cache for a single post
 	 * @since 2.0.3
 	 */
-	function delete_oembed_cache( $post_id ) {
+	static function delete_oembed_cache( $post_id ) {
 		global $wpdb;
 		$meta_key_1 = "|_oembed|_%%";
 		$meta_key_2 = "|_oembed|_time|_%%";

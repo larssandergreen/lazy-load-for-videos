@@ -1,10 +1,11 @@
 <?php
+require_once( LL_PATH . 'src/php/class-update-posts.php' );
 /**
  * register_activation_hook() and register_deactivation_hook() MUST NOT be called with action 'plugins_loaded' or any 'admin_init'
  */
 register_activation_hook( LL_FILE, 'lazyloadvideos_plugin_activation' );
 register_deactivation_hook( LL_FILE, 'lazyloadvideos_plugin_deactivation' );
-register_uninstall_hook( LL_FILE, 'lazyloadvideos_plugin_deactivation');
+register_uninstall_hook( LL_FILE, 'lazyloadvideos_plugin_uninstall');
 
 function lazyloadvideos_plugin_activation() {
 	$signup = '<div id="mc_embed_signup">
@@ -39,8 +40,13 @@ function lazyloadvideos_plugin_deactivation() {
 	lazyloadvideos_update_posts_with_embed();
 }
 
+function lazyloadvideos_plugin_uninstall() {
+	lazyloadvideos_plugin_deactivation();
+	$lazyload_admin = new Lazy_Load_For_Videos_Update_Posts();
+	$lazyload_admin->delete_postmeta();
+}
+
 function lazyloadvideos_update_posts_with_embed() {
-	require_once( LL_PATH . 'src/php/class-update-posts.php' );
 	$lazyload_admin = new Lazy_Load_For_Videos_Update_Posts();
 	$lazyload_admin->delete_oembed_caches();
 }

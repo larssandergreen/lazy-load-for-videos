@@ -163,6 +163,7 @@ Note that playlists are not working when you're using the pre-/post-roll feature
 * No longer run $.bindFirst
 * Database: Rename value associated with standard thumbnail quality from "0" to "basic". This value is stored in the "lazyload_thumbnail_quality" post meta row
 * Database: No longer add a "lazyload_thumbnail_quality" field to the DB if the value is "default"
+* Database: Remove "lazyload_thumbnail_quality" post meta when uninstalling the plugin
 
 = 2.8.7 =
 * Fix: White arrow was overlaying the red Youtube play button

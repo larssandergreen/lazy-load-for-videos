@@ -160,6 +160,7 @@ Note that playlists are not working when you're using the pre-/post-roll feature
 * The Youtube and Video configs are now stored in window.llvConfig instead of window.lazyload_video_settings
 * Remove RTL-specific CSS used for admin panel because it wasn't properly maintained
 * Delete oembed caches when uninstalling plugin, not just when deactivating it
+* Delete transient oembed caches whenever oembed caches get deleted
 * No longer run $.bindFirst
 * Database: Rename value associated with standard thumbnail quality from "0" to "basic". This value is stored in the "lazyload_thumbnail_quality" post meta row
 * Database: No longer add a "lazyload_thumbnail_quality" field to the DB if the value is "default"

@@ -19,8 +19,8 @@ class Lazy_Load_For_Videos_Update_Posts {
 	}
 
 	/**
-	 * Use WordPress' built in function to delete oembed caches
-	 * Unused by core since WP 4.0.0 (http://developer.wordpress.org/reference/classes/wp_embed/delete_oembed_caches/)
+	 * WordPress' built in function to delete oembed caches is too slow for mass updates, 
+	 * and it is unused by core since WP 4.0.0 (http://developer.wordpress.org/reference/classes/wp_embed/delete_oembed_caches/)
 	 *
 	 * @since 1.6.2
 	 */
@@ -35,6 +35,20 @@ class Lazy_Load_For_Videos_Update_Posts {
 					OR `meta_key` LIKE %s ESCAPE '|'",
 	          	$meta_key_1,
 	          	$meta_key_2
+	        )
+		);
+		
+		// Flush all transient oembed caches. Those are used by the block editor.
+		// @since 2.9.0
+		$option_name_1 = "|_transient|_oembed|_%%";
+		$option_name_2 = "|_transient|_timeout|_oembed|_%%";
+		$wpdb->query(
+	        $query = $wpdb->prepare( 
+                "DELETE FROM `".$wpdb->options."`
+                    WHERE `option_name` LIKE %s ESCAPE '|'
+					OR `option_name` LIKE %s ESCAPE '|'",
+	          	$option_name_1,
+	          	$option_name_2
 	        )
 	    );
 	}

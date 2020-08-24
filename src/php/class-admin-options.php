@@ -1,4 +1,5 @@
 <?php
+require_once( LL_PATH . 'src/php/static-update-posts.php' );
 /**
  * Create options panel (https://codex.wordpress.org/Creating_Options_Pages)
  */
@@ -9,7 +10,7 @@ class Lazy_Load_For_Videos_Admin {
 		// The 'oembed_dataparse' filter should be called on backend AND on frontend, not only on backend [is_admin()]. Otherwise, on some websites occur errors.
 		add_filter( 'oembed_dataparse', array( $this, 'lazyload_replace_video' ), 10, 3 );
 		add_action( 'admin_menu', array( $this, 'lazyload_create_menu' ) );
-		$this->lazyloadvideos_update_posts_with_embed();
+		Lazy_Load_For_Videos_Update_Posts::delete_oembed_caches();
 	}
 
 	function admin_enqueue_scripts() {

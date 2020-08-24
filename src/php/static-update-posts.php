@@ -1,13 +1,18 @@
 <?php
 class Lazy_Load_For_Videos_Update_Posts {
 
+	/**
+	 * Delete post-specific metadata that was added by this plugin.
+	 *
+	 * @since 2.9.0
+	 */
 	static function delete_postmeta() {
 		global $wpdb;
 		$meta_key_1 = "lazyload_thumbnail_quality";
 		$wpdb->query(
 	        $query = $wpdb->prepare( 
                 "DELETE FROM `".$wpdb->postmeta."`
-                    WHERE `meta_key` LIKE %s",
+                    WHERE meta_key = %s",
 	          	$meta_key_1
 	        )
 	    );
